@@ -27,6 +27,8 @@
                                 <h2 class="card-title">{{ post.title }}</h2>
                                 <p class="card-text">{{ post.excerpt }}</p>
                             </a>
+                            <hr/>
+                            <p class="card-text text-muted h6">{{ post.created on}} {{ post.number_of_likes }}/p>
                         </div>
                     </div>
                 </div>
@@ -38,7 +40,20 @@
             </div>
         </div>
     </div>
-
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justifty-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}"
+                 class="page-link">&laquo; PREV</a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.previous_page_number }}"
+                 class="page-link"> NEXT &raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
 </div>
 
 {%endblock%}
