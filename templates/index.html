@@ -28,15 +28,16 @@
                                 <p class="card-text">{{ post.excerpt }}</p>
                             </a>
                             <hr/>
-                            <p class="card-text text-muted h6">{{ post.created on}} {{ post.number_of_likes }}/p>
+                            <p class="card-text text-muted h6">{{ post.created_on }} {{ post.number_of_likes }}/p>
                         </div>
                     </div>
                 </div>
 
-            {% if forloop.counter|divisibleby:3 %}
+            {% if forloop.counter|divisibleby:6 %}
             </div>
             <div class="row">
-            {% endfor %}   
+            {% endif %} 
+            {% endfor %}  
             </div>
         </div>
     </div>
