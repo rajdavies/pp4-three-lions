@@ -32,9 +32,6 @@ The main goal for this project was to create a simple, user-friendly application
 
 ### Edit Your Post
 
-This option closes down the Gym Buddy, giving the user a thank you message and the option to restart the Gym Buddy, therby returning to the Welcome Message on the first screen and the main menu.
-
-![Image](images/screenshots/exit.png)
 
 ### Input Validation
 
