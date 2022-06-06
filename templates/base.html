@@ -38,12 +38,12 @@
                         <a class="nav-link active text-white"  href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active text-white" href="{% url 'team' %}">The Team</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link active text-white"  href="#">Fixtures</a>
                     </li>
                     {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link active text-white" href="{% url 'create-post' %}">Create Post</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{% url 'account_logout' %}">Logout</a>
                     </li>
