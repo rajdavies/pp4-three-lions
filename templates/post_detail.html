@@ -11,7 +11,8 @@
             </div>
             <div class="d-none d-md-block col-md-6 masthead-image">
                 {% if "placeholder" in post.featured_image.url %}
-                <img src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg" width="100%">
+                {% load static %}
+                <img src="{% static 'img/england.jpeg' %}" width="100%">
                 {% else %}
                 <img src=" {{ post.featured_image.url }}" width="100%">
                 {% endif %}
@@ -37,19 +38,19 @@
                                 {% if liked %}
 
                                 <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like">
-                                    <i class="fas fa-heart"></i></button>
+                                    <i class="fa-solid fa-thumbs-up"></i></button>
                                 
                                 {% else %}
 
                                 <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like">
-                                    <i class="far fa-heart"></i></button>
+                                    <i class="fa-light fa-thumbs-up"></i></button>
                                 
                                 {% endif %}
 
                             </form>
                             {% else %} 
 
-                            <span class="text-secondary"><i class="far fa-heart"></i></span>
+                            <span class="text-secondary"><i class="fa-light fa-thumbs-up"></i></span>
                             {% endif %}
                             <span class="text-secondary"> {{ post.number_of_likes }}</span>
                         </strong>
