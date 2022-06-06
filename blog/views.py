@@ -81,3 +81,26 @@ def team(request):
     """ team page view """
 
     return render(request, 'team.html')
+
+
+def createPost(request):
+    """ Create a blog post if authenticated user """
+    if request.method == 'POST':
+        blog_form = BlogForm(request.POST, request.FILES)
+
+        if blog_form.is_valid():
+            form = blog_form.save(commit=False)
+            form.author = User.objects.get(username=request.user.username)
+            form.slug = form.title.replace(" ", "-")
+            messages.success(
+                request, 'Your blog has been submitted for approval'
+            )
+            form.save()
+        return redirect('my_blogs')
+
+    blog_form = BlogForm()
+    context = {'blog_form': blog_form}
+    return render(
+        request,
+        'create-post.html', context
+    )
