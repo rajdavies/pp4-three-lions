@@ -14,7 +14,7 @@ class PostAdmin(SummernoteModelAdmin):
     actions = ['approve_posts']
 
     def approve_posts(self, request, queryset):
-        queryset.update(active=True)
+        queryset.update(approved=True)
 
 
 @admin.register(Comment)
@@ -26,4 +26,4 @@ class CommentAdmin(admin.ModelAdmin):
     actions = ['approve_comments']
 
     def approve_comments(self, request, queryset):
-        queryset.update(active=True)
+        queryset.update(approved=True)
