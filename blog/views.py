@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User
 from .models import Post
 from .forms import CommentForm, BlogForm
 
@@ -20,13 +21,13 @@ def createPost(request):
             blogform = form.save(commit=False)
             blogform.author = request.user
             blogform.save()
-        return render(request, 'create-post.html')
+            return render(request, 'create_post.html')
 
     form = BlogForm()
     context = {'form':form}
     return render(
         request,
-        'create-post.html', context
+        'create_post.html', context
     )
 
 
