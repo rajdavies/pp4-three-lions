@@ -10,11 +10,12 @@
             <div class="row">
             {% for post in post_list %}
                 <div class="col-md-4">
-                    <div class="card mb-6 my-3 align-middle">
-                        <div class="card-body">
+                    <div class="card mb-6 my-3 align-middle" style="border-radius: 5%;">
+                        <div class="card-body" style="background-color: #ffffff; border-radius: 5%;">
+                            <h3 class="card-header text-center text-white" style="background-color: #091747;">{{ post.title }}</h3>
                             <div class="image-container">
                                 {% if "placeholder" in post.featured_image.url %}
-                                <img class="card-img-top"
+                                <img class="card-img-top col-md-6"
                                 {% load static %}
                                 src="{% static 'img/england.jpeg' %}" width="100%">
                                 {% else %}
@@ -25,11 +26,11 @@
                                 </div>
                             </div>
                             <a href="{% url 'post_detail' post.slug %}" class="post-link">
-                                <h2 class="card-title">{{ post.title }}</h2>
-                                <p class="card-text">{{ post.excerpt }}</p>
+                                <p class="card-text text-right">{{ post.excerpt }}</p>
                             </a>
                             <hr/>
-                            <p class="card-text text-muted h6">{{ post.created_on }} {{ post.number_of_likes }} >
+                            <p class="card-text text-muted h6 text-center">{{ post.created_on }} {{ post.number_of_likes }} >
+                            <p class="card-text text-muted h6">Edit</p>
                         </div>
                     </div>
                 </div>
