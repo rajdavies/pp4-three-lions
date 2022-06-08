@@ -12,6 +12,5 @@ class CommentForm(forms.ModelForm):
 class BlogForm(forms.ModelForm):
     """ Form for user to create their own blog post """
     class Meta:
-        """ use post model"""
         model = Post
-        fields = ('title', 'content', 'excerpt')
+        fields = ('title', 'content',)

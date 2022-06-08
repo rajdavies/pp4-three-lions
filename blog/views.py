@@ -12,6 +12,24 @@ class PostList(generic.ListView):
     paginate_by = 4
 
 
+def createPost(request):
+    """ Create a blog post if authenticated user """
+    if request.method == 'POST':
+        form = BlogForm(request.POST, request.FILES)
+        if form.is_valid():
+            blogform = form.save(commit=False)
+            blogform.author = request.user
+            blogform.save()
+        return render(request, 'create-post.html')
+
+    form = BlogForm()
+    context = {'form':form}
+    return render(
+        request,
+        'create-post.html', context
+    )
+
+
 class PostDetail(View):
     def get(self, request, slug, *args, **kwargs):
         queryset = Post.objects.filter(status=1)
@@ -81,17 +99,3 @@ def team(request):
     """ team page view """
 
     return render(request, 'team.html')
-
-
-def createPost(request):
-    """ Create a blog post if authenticated user """
-    if request.method == 'POST':
-        form = BlogForm(request.POST, request.FILES)
-        if form.is_valid():
-            blogform = form.save(commit=False)
-            blogform.author = request.user
-            blogform.save()
-        return render(request, 'create-post.html')
-
-    form = BlogForm()
-    return render(request, 'create-post.html', {'form': form})
