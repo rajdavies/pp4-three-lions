@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from .models import Post
-from .forms import CommentForm
+from .forms import CommentForm, BlogForm
 
 
 class PostList(generic.ListView):
@@ -86,21 +86,12 @@ def team(request):
 def createPost(request):
     """ Create a blog post if authenticated user """
     if request.method == 'POST':
-        blog_form = BlogForm(request.POST, request.FILES)
+        form = BlogForm(request.POST, request.FILES)
+        if form.is_valid():
+            blogform = form.save(commit=False)
+            blogform.author = request.user
+            blogform.save()
+        return render(request, 'create-post.html')
 
-        if blog_form.is_valid():
-            form = blog_form.save(commit=False)
-            form.author = User.objects.get(username=request.user.username)
-            form.slug = form.title.replace(" ", "-")
-            messages.success(
-                request, 'Your blog has been submitted for approval'
-            )
-            form.save()
-        return redirect('my_blogs')
-
-    blog_form = BlogForm()
-    context = {'blog_form': blog_form}
-    return render(
-        request,
-        'create-post.html', context
-    )
+    form = BlogForm()
+    return render(request, 'create-post.html', {'form': form})

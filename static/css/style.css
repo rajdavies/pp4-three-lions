@@ -120,3 +120,7 @@ body {
     background: transparent;
     border: none;
 }
+
+.footer {
+    bottom: 0;
+}
