@@ -25,7 +25,7 @@
                 <hr/>
                 <p class="card-text text-dark h6 text-center"><i class="fa-solid fa-thumbs-up"></i>{{ post.number_of_likes }}</p>
                 
-                <a class="btn btn-warning btn-sm" href="edit/{{ post.id }}">Edit Post</a>
+                <a class="btn btn-primary btn-sm" href="edit/{{ post.id }}">Edit Post</a>
                 <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
                 data-bs-target="#deleteModal{{ post.id }}">Delete</button>
             </div>
@@ -45,7 +45,7 @@
                         Are you sure you want to delete "{{ post.title }}"?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
                         <a class="btn btn-danger" href="delete/{{ post.id }}">Delete</a>
                     </div>
                 </div>
