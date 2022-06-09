@@ -3,23 +3,22 @@
 {% block content %}
 
 <div class="container-fluid ">
-    <h1 class="title text-center mt-2 text-dark">Three Lion Posts</h1>
     <div class="row">
 
-        <!-- Blog Entries Column -->
+        <!-- Blog Posts Column -->
         <div class="col-md-12 mt-3">
             <div class="row">
             {% for post in post_list %}
                 <div class="col-md-8 mt-3 mx-auto">
-                    <div class="card mb-4 my-3 align-middle border-dark" style="border-radius: 0%;">
-                        <div class="card-body border-dark" style="background-color: #ffffff; border-radius: 5%;">
-                            <h2 class="card-header text-center text-white" style="background-color: #091747;">{{ post.title }}</h3>
-                                <p class="author h5">Author: {{post.author }}</p>
+                    <div class="card mb-4 my-3 align-middle border-dark" style="background-color: #ffffff;">
+                        <div class="card-body border-dark" style="background-color: #ffffff;">
+                            <h2 class="card-header text-center text-dark border-dark" style="background-color: #ffffff;">{{ post.title }}</h3>
+                                <p class="author h5 text-dark">Author: {{post.author }}</p>
                                 <hr/>
                             </div>
-                            <p class="card-text text-center h4">{{ post.excerpt }}</p>
+                            <p class="card-text text-center text-dark h4" >{{ post.excerpt }}</p>
                             <a href="{% url 'post_detail' post.slug %}" class="post-link">
-                                <p class="card-text text-center h6">Read More</p>
+                                <p class="card-text text-center text-dark h6">Read More</p>
                             </a>
                             <hr/>
                             <p class="card-text text-dark h6 text-center">{{ post.created_on }}</p>
