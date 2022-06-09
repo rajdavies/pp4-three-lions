@@ -10,26 +10,20 @@
             <div class="row">
             {% for post in post_list %}
                 <div class="col-md-4">
-                    <div class="card mb-6 my-3 align-middle" style="border-radius: 5%;">
-                        <div class="card-body" style="background-color: #ffffff; border-radius: 5%;">
-                            <h3 class="card-header text-center text-white" style="background-color: #091747;">{{ post.title }}</h3>
-                            <div class="image-container">
-                                {% if "placeholder" in post.featured_image.url %}
-                                <img class="card-img-top col-md-6"
-                                src="https://www.theguardian.com/football/2021/jul/11/euro-2020-trip-how-england-squad-recovered-from-lowest-moments">
-                                {% else %}
-                                <img class="card-img-top" src="{{ post.featured_image.url }}">
-                                {% endif %}
-                                <div class="image-flash">
-                                    <p class="author">Author: {{post.author }}</p>
-                                </div>
+                    <div class="card mb-6 my-3 align-middle border-dark" style="border-radius: 2%;">
+                        <div class="card-body border-dark" style="background-color: #ffffff; border-radius: 5%;">
+                            <h2 class="card-header text-center text-white" style="background-color: #091747;">{{ post.title }}</h3>
+                                <p class="author h5">Author: {{post.author }}</p>
+                                <hr/>
                             </div>
+                            <p class="card-text text-center h4">{{ post.excerpt }}</p>
                             <a href="{% url 'post_detail' post.slug %}" class="post-link">
-                                <p class="card-text text-right">{{ post.excerpt }}</p>
+                                <p class="card-text text-center h6">Read More</p>
                             </a>
                             <hr/>
-                            <p class="card-text text-muted h6 text-center">{{ post.created_on }} {{ post.number_of_likes }} >
-                            <p class="card-text text-muted h6">Edit</p>
+                            <p class="card-text text-dark h6 text-center">{{ post.created_on }}</p>
+                            <hr/>
+                            <p class="card-text text-dark h6 text-center"><i class="fa-solid fa-thumbs-up"></i>{{ post.number_of_likes }}</p>
                         </div>
                     </div>
                 </div>
