@@ -117,8 +117,25 @@ class CreatePost(View):
 
 
 def user_posts(request):
-    """ authenticated user can view their created posts """
+    """ authenticated user can view and manage their created posts """
 
     logged_in_user = request.user
     logged_in_user_posts = Post.objects.filter(author=logged_in_user)
     return render(request, 'user_posts.html', {'posts': logged_in_user_posts})
+
+def edit_post(request, post_id):
+    """ authenticated users can edit their own blog posts """
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == 'POST':
+        blog_form = BlogForm(request.POST, instance=post)
+        if blog_form.is_valid():
+            form = blog_form.save(commit=False)
+            form.approved = False
+            messages.success(
+                request, 'Updated post has been submitted for admin approval'
+            )
+            form.save()
+            return redirect('user_posts')
+    blog_form = BlogForm(instance=post)
+    context = {'blog_form': blog_form}
+    return render(request, 'edit_posts.html', context)
