@@ -1,6 +1,8 @@
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
 from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User
+from django.contrib import messages
 from .models import Post
 from .forms import CommentForm, BlogForm
 
@@ -10,23 +12,6 @@ class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('created_on')
     template_name = 'index.html'
     paginate_by = 6
-
-
-def createPost(request):
-    """ Create a blog post if authenticated user """
-    if request.method == 'POST':
-        form = BlogForm(request.POST, request.FILES)
-        if form.is_valid():
-            blogform = form.save(commit=False)
-            blogform.author = request.user
-            return render(request, 'create_post.html')
-
-    form = BlogForm()
-    context = {'form':form}
-    return render(
-        request,
-        'create_post.html', context
-    )
 
 
 class PostDetail(View):
@@ -94,7 +79,40 @@ class PostLike(View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
-def team(request):
-    """ team page view """
+class CreatePost(View):
+    """
+    This class contains the get method to provide the blog post
+    form to enable the user to create a blog post.
+    This class contians the post method allowing the user to
+    submit their blog post to the admin for verification.
+    """
 
-    return render(request, 'team.html')
+    def get(self, request, *args, **kwargs):
+        """
+        the get method which displays the blog post 
+        form to the user.
+        """
+        post_form = BlogForm()
+
+        context = {'post_form': post_form}
+
+        return render(request, 'create_post.html', context)
+    
+    def post(self, request, *args, **kwargs):
+        """ 
+        This post method submits the blog post
+        to be accepted in the admin area.
+        """
+
+        post_form = BlogForm(request.POST, request.FILES)
+
+        if post_form.is_valid():
+            blog_post = post_form.save(commit=False)
+            blog_post.author = User.objects.get(id=self.request.user.id)
+            blog_post.image = request.Files.get('featured_image')
+            blog_post.slug = post_form.title.replace(" ", "-")
+            messages.success(
+                request, 'Your blog has been submitted! Please wait for it to be approved.'
+            )
+            blog_post.save()
+        return redirect('home')
