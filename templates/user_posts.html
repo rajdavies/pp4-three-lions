@@ -3,27 +3,30 @@
 {% block content %}
 
 <div class="container-fluid ">
-    <h3 class="title">{{ user.username}}'s Posts:</h3>
+    <h3 class="title mt-3 text-center">{{ user.username}}'s Posts:</h3>
     <div class="row">
 
         {% for post in posts %}
-        <div class="card user_post_list">
+        <div class="card user_post_list mt-2 mb-2 border-dark col-md-8 mx-auto ">
             {% if post.approved %}
-            <h4 class="card-header status">Blog Post approved></i></h4>
+            <h4 class="card-header status">Blog Post Approved</i></h4>
             {% else %}
             <h4 class="card-header status">Pending Approval</h4>
             {% endif %}
             <div class="card-body">
                 {% if post.approved %}
-                <h5 class="card-title"><a href="{% url 'post_details' post.slug %}">{{ post.title }}</a>
+                <h5 class="card-title"><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a>
                 </h5>
                 {% else %}
                 <h5 class="card-title list-title">{{ post.title }}</h5>
                 {% endif %}
                 <p class="card-text">{{ post.excerpt }}</p>
                 <p class="card-text">{{ post.created_on }}</p>
-                <a class="btn btn-warning btn-lg" href="edit/{{ post.id }}">Edit Post</a>
-                <button class="btn btn-danger btn-lg" data-bs-toggle="modal"
+                <hr/>
+                <p class="card-text text-dark h6 text-center"><i class="fa-solid fa-thumbs-up"></i>{{ post.number_of_likes }}</p>
+                
+                <a class="btn btn-warning btn-sm" href="edit/{{ post.id }}">Edit Post</a>
+                <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
                 data-bs-target="#deleteModal{{ post.id }}">Delete</button>
             </div>
         </div>
