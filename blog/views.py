@@ -113,3 +113,12 @@ class CreatePost(View):
             )
             form.save()
         return redirect('home')
+
+
+
+def user_posts(request):
+    """ authenticated user can view their created posts """
+
+    logged_in_user = request.user
+    logged_in_user_posts = Post.objects.filter(author=logged_in_user)
+    return render(request, 'user_posts.html', {'posts': logged_in_user_posts})
