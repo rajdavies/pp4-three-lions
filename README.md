@@ -8,12 +8,12 @@ Once the post has been corrected it will be sent for approval by the admin so as
 
 Other features the user can utilise is editing previous posts and deleting them alltogether within their personal posts page. This enables the user to manage their content as they see fit.
 
-Gym Buddy is a Django framework app. The user's workout data is stored in a database with PostgreSql and the app is hosted on Heroku. 
+Three Lions is a Django framework app. The user's post data is stored in a database with PostgreSql and the app is hosted on Heroku. 
 
 Below is the link to the live website.
 
 
-## Project Planning Phase
+## Project Planning
 
 The main goal for this project was to create a simple, user-friendly application that allows the user to:
 
@@ -23,51 +23,45 @@ The main goal for this project was to create a simple, user-friendly application
 
 3. View a list of posts from other users and have the ability to like and comment on those posts.
 
-# User Stories + Acceptance Criteria
+The user stories for this project can be viewed [here](https://github.com/ConRdav/pp4-three-lions/projects/1)
 
-These three project goals informed the user story and acceptance criteria that guided the development of the project, as detailed below:
-
-A1) As a user, I want clear instructions on how to navigate and use the app so that it is easy to use.
-
-A2) As a user, I want to be able to view a pre-defined workout routine based on the number of workouts I wish to complete each week.
-
-A3) As a user, I want to be able to create my own workout and save this workout for future reference.
-
-A4) As a user, I want to be able to both view and clear any saved workouts as I wish.
-
+## Project Management
+I used GitHub's KanBan board to manage my workflow. [Three Lions Workflow](https://github.com/ConRdav/pp4-three-lions/projects/2)
 
 ## Features
 
 ### Welcome to Three Lions
-
-
-
-### View A List of Blogs
-
-
+Upon opening the app users are met with a page full of blog posts which even without an account they can view. 
+IMAGE
+The navbar for users without an account will have a sign up option allowing them to create their own account.
+IMAGE
 
 ### Create A Blog Post
-
+Once a user has their account set up they are then given more options on the navbar including 'create a post' and 'My posts'. 
+IMAGE
 
 ### View Your Own Posts
-
+When a user clicks on my posts they will have a similar screen as the home page but with only their posts on it and it will show if they have been approved by admin or if its pending.
+IMAGE
 
 
 ### Delete Your Post
-
+Users will need to confirm they wish to delete their post.
+IMAGE
 
 
 ### Edit Your Post
-
-
-### Input Validation
-
+Similar to create your own post form users can alter their previous posts and resubmit them for approval.
+IMAGE
 
 ## Features left to implement
 
 
 ## Testing
 
+## Manual Testing
+
+## Automatic Testing
 
 ## Bugs
 
@@ -81,12 +75,24 @@ Existing bugs:
 
 ## Deployment
 
-### The app has been deployed in Heroku.
-
 
 
 
 ## Used Technologies
+* HTML
+* CSS
+* Python
+* JavaScript
+
+## Frameworks and Libraries used
+* Django with;
+    * gunicorn
+    * psycopg2
+    * postgresql
+    * AllAuth
+    * Crispy Forms
+    * colorfield
+* Bootstrap
 
 
 
