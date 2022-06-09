@@ -13,7 +13,7 @@
     <h3 class="title">Create your post!</h3>
     <p>Publishing as: {{ user.username }}</p>
     <form method="POST" class="form-group form-control-lg text-dark" action="{% url 'create_post' %}">
-        {{ form | crispy }}
+        {{ blog_form | crispy }}
         {% csrf_token %}
         <button type="submit" class="btn btn-signup btn-sm btn btn-outline-dark">Post</button>
     </form>

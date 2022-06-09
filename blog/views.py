@@ -13,7 +13,6 @@ class PostList(generic.ListView):
     template_name = 'index.html'
     paginate_by = 6
 
-
 class PostDetail(View):
     def get(self, request, slug, *args, **kwargs):
         queryset = Post.objects.filter(status=1)
@@ -92,10 +91,8 @@ class CreatePost(View):
         the get method which displays the blog post 
         form to the user.
         """
-        post_form = BlogForm()
-
-        context = {'post_form': post_form}
-
+        blog_form = BlogForm()
+        context = {'blog_form': blog_form}
         return render(request, 'create_post.html', context)
     
     def post(self, request, *args, **kwargs):
@@ -104,15 +101,14 @@ class CreatePost(View):
         to be accepted in the admin area.
         """
 
-        post_form = BlogForm(request.POST, request.FILES)
+        blog_form = BlogForm(request.POST, request.FILES)
 
-        if post_form.is_valid():
-            blog_post = post_form.save(commit=False)
-            blog_post.author = User.objects.get(id=self.request.user.id)
-            blog_post.image = request.Files.get('featured_image')
-            blog_post.slug = post_form.title.replace(" ", "-")
+        if blog_form.is_valid():
+            form = blog_form.save(commit=False)
+            form.author = User.objects.get(username=request.user.username)
+            form.slug = form.title.replace(" ", "-")
             messages.success(
-                request, 'Your blog has been submitted! Please wait for it to be approved.'
+                request, 'Your post has been submitted and awaiting approval.'
             )
-            blog_post.save()
+            form.save()
         return redirect('home')
