@@ -139,3 +139,10 @@ def edit_post(request, post_id):
     blog_form = BlogForm(instance=post)
     context = {'blog_form': blog_form}
     return render(request, 'edit_posts.html', context)
+
+def delete_post(request, post_id):
+    """ authenticated users can delete their own posts """
+    post = get_object_or_404(Post, id=post_id)
+    post.delete()
+    messages.success(request, 'Post successfully deleted.')
+    return redirect('user_posts')
