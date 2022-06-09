@@ -2,15 +2,15 @@
 
 {% block content %}
 
-<div class="container-fluid">
+<div class="container-fluid ">
     <div class="row">
 
         <!-- Blog Entries Column -->
-        <div class="col-12 mt-3 left">
+        <div class="col-md-12 mt-3">
             <div class="row">
             {% for post in post_list %}
-                <div class="col-md-4">
-                    <div class="card mb-6 my-3 align-middle border-dark" style="border-radius: 2%;">
+                <div class="col-md-12 mt-3">
+                    <div class="card mb-4 my-3 align-middle border-dark" style="border-radius: 0%;">
                         <div class="card-body border-dark" style="background-color: #ffffff; border-radius: 5%;">
                             <h2 class="card-header text-center text-white" style="background-color: #091747;">{{ post.title }}</h3>
                                 <p class="author h5">Author: {{post.author }}</p>

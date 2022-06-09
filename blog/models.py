@@ -5,6 +5,7 @@ and commenting within the Three Lions blog app
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Post(models.Model):
     """
     Model for blog posts and all the fields included
