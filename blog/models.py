@@ -5,9 +5,6 @@ and commenting within the Three Lions blog app
 from django.db import models
 from django.contrib.auth.models import User
 
-STATUS = ((0, "Draft"), (1, "Publish"))
-
-
 class Post(models.Model):
     """
     Model for blog posts and all the fields included
@@ -21,7 +18,6 @@ class Post(models.Model):
     content = models.TextField()
     excerpt = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
-    status = models.IntegerField(choices=STATUS, default=0)
     likes = models.ManyToManyField(User, related_name='blog_likes', blank=True)
     approved = models.BooleanField(default=False)
 
