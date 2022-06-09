@@ -1,5 +1,23 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
 
-{%endblock%}
+{% load crispy_forms_tags %}
+
+<div class="container-fluid publish-form-container">
+
+    {% if user.is_authenticated %}
+    <h3 class="title">Edit your post</h3>
+    <p>Editing as: {{ user.username }}</p>
+    <form method="POST">
+        {{ blog_form | crispy }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-signup btn-sm">Update Blog</button>
+        {% if updated %}
+        {{ message }}
+    </form>
+    {% endif %}
+    {% endif %}
+</div>
+
+{% endblock %}
