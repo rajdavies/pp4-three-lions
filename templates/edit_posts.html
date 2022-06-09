@@ -13,7 +13,9 @@
         {% csrf_token %}
         <button type="submit" class="btn btn-signup btn-sm mt-2 mb-2 btn btn-primary">Update Blog</button>
         {% if updated %}
-        {{ message }}
+        <div class="alert alert-success" role="alert">
+            Your post has been updated and is awaiting approval.
+        </div>
     </form>
     {% endif %}
     {% endif %}

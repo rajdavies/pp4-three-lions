@@ -6,11 +6,13 @@
 
 <div class="container-fluid publish-form-container mx-auto">
 
-    {% if published %}
-        {{ message }}
+    {% if posted %}
+    <div class="alert alert-success" role="alert">
+        Your post is awaiting approval.
+    </div>
     {% else %}
     {% if user.is_authenticated %}
-    <p>Publishing as: {{ user.username }}</p>
+    <p>Posting as: {{ user.username }}</p>
     <form method="POST" class="form-group form-control-lg text-dark" action="{% url 'create_post' %}">
         {{ blog_form | crispy }}
         {% csrf_token %}
