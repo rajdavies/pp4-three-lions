@@ -4,7 +4,6 @@ and commenting within the Three Lions blog app
 
 from django.db import models
 from django.contrib.auth.models import User
-from cloudinary.models import CloudinaryField
 
 STATUS = ((0, "Draft"), (1, "Publish"))
 
@@ -26,12 +25,15 @@ class Post(models.Model):
     likes = models.ManyToManyField(User, related_name='blog_likes', blank=True)
 
     class Meta:
+        """orders blog posts by creation date"""
         ordering = ['-created_on']
 
     def __str__(self):
+        """ returns the blog title"""
         return self.title
 
     def number_of_likes(self):
+        """ returns the blog post like count"""
         return self.likes.count()
 
 
@@ -39,7 +41,7 @@ class Comment(models.Model):
     """
     Model for blog postcomments and all the fields included
     """
-    
+
     post = models.ForeignKey(
         Post, on_delete=models.CASCADE, related_name='comments')
     name = models.CharField(max_length=80)
@@ -49,7 +51,9 @@ class Comment(models.Model):
     approved = models.BooleanField(default=False)
 
     class Meta:
+        """ orders comments by creation date"""
         ordering = ['created_on']
 
     def __str__(self):
+        """ returns the comment and name of commenter"""
         return f"Comment {self.body} by {self.name}"
