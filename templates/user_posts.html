@@ -6,50 +6,54 @@
     <h3 class="title">{{ user.username}}'s Posts:</h3>
     <div class="row">
 
-        <!-- Blog Entries Column -->
-        <div class="col-md-12 mt-3">
-            <div class="row">
-            {% for post in post_list %}
-                <div class="col-md-12 mt-3">
-                    <div class="card mb-4 my-3 align-middle border-dark" style="border-radius: 0%;">
-                        <div class="card-body border-dark" style="background-color: #ffffff; border-radius: 5%;">
-                            <h2 class="card-header text-center text-white" style="background-color: #091747;">{{ post.title }}</h3>
-                                <p class="author h5">Author: {{post.author }}</p>
-                                <hr/>
-                            </div>
-                            <p class="card-text text-center h4">{{ post.excerpt }}</p>
-                            <a href="{% url 'post_detail' post.slug %}" class="post-link">
-                                <p class="card-text text-center h6">Read More</p>
-                            </a>
-                            <hr/>
-                            <p class="card-text text-dark h6 text-center">{{ post.created_on }}</p>
-                            <hr/>
-                            <p class="card-text text-dark h6 text-center"><i class="fa-solid fa-thumbs-up"></i>{{ post.number_of_likes }}</p>
-                        </div>
-                    </div>
-                </div>
-
-            {% if forloop.counter|divisibleby:6 %}
-            </div>
-            <div class="row">
-            {% endif %} 
-            {% endfor %}  
+        {% for post in posts %}
+        <div class="card user_post_list">
+            {% if post.approved %}
+            <h4 class="card-header status">Blog Post approved></i></h4>
+            {% else %}
+            <h4 class="card-header status">Pending Approval</h4>
+            {% endif %}
+            <div class="card-body">
+                {% if post.approved %}
+                <h5 class="card-title"><a href="{% url 'post_details' post.slug %}">{{ post.title }}</a>
+                </h5>
+                {% else %}
+                <h5 class="card-title list-title">{{ post.title }}</h5>
+                {% endif %}
+                <p class="card-text">{{ post.excerpt }}</p>
+                <p class="card-text">{{ post.created_on }}</p>
+                <a class="btn btn-warning btn-lg" href="edit/{{ post.id }}">Edit Post</a>
+                <button class="btn btn-danger btn-lg" data-bs-toggle="modal"
+                data-bs-target="#deleteModal{{ post.id }}">Delete</button>
             </div>
         </div>
-    </div>
-    {% if is_paginated %}
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
-            {% endif %}
-            {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
 
-            {% endif %}
-        </ul>
-    </nav>
-    {% endif %}
+         <!-- Modal -->
+         <div class="modal fade" id="deleteModal{{ post.id }}" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content delete-modal">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Delete</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete "{{ post.title }}"?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <a class="btn btn-danger" href="delete/{{ post.id }}">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>You have no blogs</p>
+        <a class="btn btn-signup btn-lg profile-item-link" href="{% url 'create_post' %}">Create a post</a>
+    {% endfor %}
 </div>
+
+
 
 {%endblock%}
