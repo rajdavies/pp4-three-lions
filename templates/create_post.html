@@ -4,7 +4,7 @@
 
 {% load crispy_forms_tags %}
 
-<div class="container-fluid publish-form-container">
+<div class="container-fluid publish-form-container mx-auto">
 
     {% if published %}
         {{ message }}
@@ -14,7 +14,7 @@
     <form method="POST" class="form-group form-control-lg text-dark" action="{% url 'create_post' %}">
         {{ blog_form | crispy }}
         {% csrf_token %}
-        <button type="submit" class="btn btn-signup btn-sm btn btn-primary">Post</button>
+        <button type="submit" class="btn btn-signup btn-sm mt-2 btn btn-primary">Post</button>
     </form>
     {% endif %}
     {% endif %}
