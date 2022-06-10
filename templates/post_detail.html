@@ -9,14 +9,6 @@
                 <h1 class="post-title">{{ post.title }}</h1>
                 <p class="post-subtitle">{{ post.author }} | {{ post.created_on }}</p>
             </div>
-            <div class="d-none d-md-block col-md-6 masthead-image">
-                {% if "placeholder" in post.featured_image.url %}
-                {% load static %}
-                <img src="{% static 'img/england.jpeg' %}" width="100%">
-                {% else %}
-                <img src=" {{ post.featured_image.url }}" width="100%">
-                {% endif %}
-            </div>
         </div>
     </div>
 </div>
@@ -92,7 +84,7 @@
             <div class="card-body">
 
                 {% if commented %}
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-success messages" role="alert">
                     Your comment is awaiting approval
                 </div>
                 {% else %}
