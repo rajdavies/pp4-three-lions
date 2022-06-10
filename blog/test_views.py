@@ -2,8 +2,7 @@
 
 from django.test import TestCase, Client
 from django.urls import reverse
-from django.contrib.auth.models import User
-from .models import Post, Comment
+
 
 class TestViews(TestCase):
     """ Contains all the unit testing for my views
@@ -15,7 +14,7 @@ class TestViews(TestCase):
         response = client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'index.html')
-    
+
     def test_create_post(self):
         """ Unit test for CreatePost """
         client = Client()
