@@ -1,4 +1,8 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+
+{% load static%}
+
+{% block content %}
 
 {% load crispy_forms_tags %}
 
@@ -6,7 +10,7 @@
     <div class="container">
         <div class="row g-0">
             <div class="col-md-6 masthead-text">
-                <h1 class="post-title">{{ post.title }}</h1>
+                <h1 class="post-title" >{{ post.title }}</h1>
                 <p class="post-subtitle">{{ post.author }} | {{ post.created_on }}</p>
             </div>
         </div>
@@ -96,7 +100,7 @@
                 <form method="post" style="margin-top: 1.3em;">
                     {{ comment_form | crispy }}
                     {% csrf_token %}
-                    <button type="submit"class="btn btn-signup btn-lg">Submit</button>
+                    <button type="submit"class="btn btn-signup btn-sm btn-primary mt-2">Submit</button>
                 </form>
                 {% endif %}
                 {% endif %}
