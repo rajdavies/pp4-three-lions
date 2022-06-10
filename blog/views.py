@@ -8,6 +8,7 @@ from .forms import CommentForm, BlogForm
 
 
 class PostList(generic.ListView):
+    """ displays blog post list """
     model = Post
     queryset = Post.objects.filter(approved=True).order_by('created_on')
     template_name = 'index.html'
@@ -15,7 +16,9 @@ class PostList(generic.ListView):
 
 
 class PostDetail(View):
+    """ displays blog post detail """
     def get(self, request, slug, *args, **kwargs):
+        """ gets the post detail """
         queryset = Post.objects.filter(approved=True)
         post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.filter(approved=True).order_by('created_on')
@@ -36,6 +39,7 @@ class PostDetail(View):
         )
 
     def post(self, request, slug, *args, **kwargs):
+        """ posts comments """
         queryset = Post.objects.filter(approved=True)
         post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.filter(approved=True).order_by('created_on')
@@ -68,8 +72,9 @@ class PostDetail(View):
 
 
 class PostLike(View):
-
+    """ posts likes or removes likes from the post detail """
     def post(self, request, slug):
+        """ function allows user to like or unlike posts """
         post = get_object_or_404(Post, slug=slug)
         if post.likes.filter(id=request.user.id).exists():
             post.likes.remove(request.user)
@@ -89,15 +94,15 @@ class CreatePost(View):
 
     def get(self, request, *args, **kwargs):
         """
-        the get method which displays the blog post 
+        the get method which displays the blog post
         form to the user.
         """
         blog_form = BlogForm()
         context = {'blog_form': blog_form}
         return render(request, 'create_post.html', context)
-    
+
     def post(self, request, *args, **kwargs):
-        """ 
+        """
         This post method submits the blog post
         to be accepted in the admin area.
         """
@@ -122,6 +127,7 @@ def user_posts(request):
     logged_in_user_posts = Post.objects.filter(author=logged_in_user)
     return render(request, 'user_posts.html', {'posts': logged_in_user_posts})
 
+
 def edit_post(request, post_id):
     """ authenticated users can edit their own blog posts """
     post = get_object_or_404(Post, id=post_id)
@@ -138,6 +144,7 @@ def edit_post(request, post_id):
     blog_form = BlogForm(instance=post)
     context = {'blog_form': blog_form}
     return render(request, 'edit_posts.html', context)
+
 
 def delete_post(request, post_id):
     """ authenticated users can delete their own posts """
