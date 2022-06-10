@@ -1,6 +1,9 @@
 """ Unit testing views """
 
-from django.test import TestCase
+from django.test import TestCase, Client
+from django.urls import reverse
+from django.contrib.auth.models import User
+from .models import Post, Comment
 
 class TestViews(TestCase):
     """ Contains all the unit testing for my views
@@ -8,13 +11,14 @@ class TestViews(TestCase):
 
     def test_get_post_list(self):
         """ Unit test for PostList """
-        response = self.client.get('/')
+        client = Client()
+        response = client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'index.html')
     
-    def test_get_post_detail(self):
-        """ Tests if it gets the right response and template """
-        response = self.client.get('post_detail')
+    def test_create_post(self):
+        """ Unit test for CreatePost """
+        client = Client()
+        response = client.get(reverse('create_post'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'post_detail.html')
-        
+        self.assertTemplateUsed(response, 'create_post.html')

@@ -115,7 +115,6 @@ class CreatePost(View):
         return redirect('home')
 
 
-
 def user_posts(request):
     """ authenticated user can view and manage their created posts """
 
