@@ -19,12 +19,12 @@ class TestUrls(TestCase):
         """ tests if post_detail url resolves """
         url = reverse('post_detail', args=[12345678901234567890])
         self.assertEqual(resolve(url).func.view_class, views.PostDetail)
-    
+
     def test_post_like_url_resolves(self):
         """ tests if post_like url resolves """
         url = reverse('post_like', args=[12345678901234567890])
         self.assertEqual(resolve(url).func.view_class, views.PostLike)
-    
+
     def test_create_post_url_resolves(self):
         """ tests if create_post url resolves """
         url = reverse('create_post')
